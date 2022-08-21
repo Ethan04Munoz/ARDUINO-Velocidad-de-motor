@@ -57,6 +57,8 @@ void loop(){
     delay(1000);
   }
   for(int i = 1; i <= tiempo; i++){
+    p -= porcentaje;
+    e -= equivalencia;
     Serial.println("");
     Serial.print(i);
     Serial.print(" Segundo(s)");
@@ -65,8 +67,6 @@ void loop(){
     Serial.print(" %");
     Serial.println("");
     analogWrite(GPIO_MOTOR, e);
-    p -= porcentaje;
-    e -= equivalencia;
     delay(1000);
   }
   analogWrite(GPIO_MOTOR, 0);
