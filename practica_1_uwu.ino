@@ -1,9 +1,14 @@
 #include <Keypad.h>
+#include <LiquidCrystal_I2C.h>
 const byte filas = 4; 
 const byte columnas = 4;
 
 // Pin donde esta conectado el MOSFET
 #define GPIO_MOTOR 10
+
+//Crear el objeto lcd  dirección  0x3F y 16 columnas x 2 filas
+LiquidCrystal_I2C lcd(0x27,16,2);  //
+
 
 byte pinesFilas[]  = {9,8,7,6};
 byte pinesColumnas[] = {5,4,3,2};
@@ -19,6 +24,12 @@ String res = "";
 
 void setup(){  
   Serial.begin(9600);
+  // Inicializar el LCD
+  lcd.init();
+  //Encender la luz de fondo.
+  lcd.backlight();
+  // Escribimos el Mensaje en el LCD.
+  lcd.print("Hola Mundo");
   Serial.println("Teclado 4x4 con Biblioteca Keypad");
   Serial.println();
   pinMode(GPIO_MOTOR, OUTPUT);
