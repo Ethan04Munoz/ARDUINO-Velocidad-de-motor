@@ -30,24 +30,24 @@ void setup(){
   lcd.backlight();
   // Escribimos el Mensaje en el LCD.
   lcd.print("Hola Mundo");
-  Serial.println("Teclado 4x4 con Biblioteca Keypad");
-  Serial.println();
+  delay(1000);
+  lcd.clear();
   pinMode(GPIO_MOTOR, OUTPUT);
 }
 void loop(){
-  Serial.println("Ingrese el tiempo");
+  lcd.print("Ingrese el tiempo");
   char key = teclado1.getKey();
   while(key != '#')
   {
     key = teclado1.getKey();
     if(key != NO_KEY and key != '#')
     {
-      Serial.print(key);
+      lcd.print(key);
       res += key; 
     }
     delay(100); 
   }
-  Serial.println("");
+  lcd.print("");
   tiempo = res.toInt();
   equivalencia = 255/tiempo;
   porcentaje = 100/tiempo;
@@ -55,13 +55,13 @@ void loop(){
   e = equivalencia;
   analogWrite(GPIO_MOTOR, 0);
   for(int i = 1; i <= tiempo; i++){
-    Serial.println("");
-    Serial.print(i);
-    Serial.print(" Segundo(s)");
-    Serial.println("");
-    Serial.print(p);
-    Serial.print(" %");
-    Serial.println("");
+    lcd.print("");
+    lcd.print(i);
+    lcd.print(" Segundo(s)");
+    lcd.print("");
+    lcd.print(p);
+    lcd.print(" %");
+    lcd.print("");
     analogWrite(GPIO_MOTOR, e);
     p += porcentaje;
     e += equivalencia;
@@ -70,13 +70,13 @@ void loop(){
   for(int i = 1; i <= tiempo; i++){
     p -= porcentaje;
     e -= equivalencia;
-    Serial.println("");
-    Serial.print(i);
-    Serial.print(" Segundo(s)");
-    Serial.println("");
-    Serial.print(p);
-    Serial.print(" %");
-    Serial.println("");
+    lcd.print("");
+    lcd.print(i);
+    lcd.print(" Segundo(s)");
+    lcd.print("");
+    lcd.print(p);
+    lcd.print(" %");
+    lcd.print("");
     analogWrite(GPIO_MOTOR, e);
     delay(1000);
   }
