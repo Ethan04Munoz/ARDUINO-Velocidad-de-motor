@@ -35,7 +35,9 @@ void setup(){
   pinMode(GPIO_MOTOR, OUTPUT);
 }
 void loop(){
-  lcd.print("Ingrese el tiempo");
+  lcd.print("Ingrese el");
+  lcd.setCursor(0,1);
+  lcd.print("tiempo: ");
   char key = teclado1.getKey();
   while(key != '#')
   {
@@ -47,7 +49,6 @@ void loop(){
     }
     delay(100); 
   }
-  lcd.print("");
   tiempo = res.toInt();
   equivalencia = 255/tiempo;
   porcentaje = 100/tiempo;
@@ -55,13 +56,11 @@ void loop(){
   e = equivalencia;
   analogWrite(GPIO_MOTOR, 0);
   for(int i = 1; i <= tiempo; i++){
-    lcd.print("");
     lcd.print(i);
     lcd.print(" Segundo(s)");
     lcd.print("");
     lcd.print(p);
     lcd.print(" %");
-    lcd.print("");
     analogWrite(GPIO_MOTOR, e);
     p += porcentaje;
     e += equivalencia;
