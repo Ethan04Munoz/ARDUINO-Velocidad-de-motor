@@ -54,30 +54,31 @@ void loop(){
   porcentaje = 100/tiempo;
   p = porcentaje;
   e = equivalencia;
+  lcd.clear();
   analogWrite(GPIO_MOTOR, 0);
   for(int i = 1; i <= tiempo; i++){
     lcd.print(i);
     lcd.print(" Segundo(s)");
-    lcd.print("");
+    lcd.setCursor(0,1);
     lcd.print(p);
     lcd.print(" %");
     analogWrite(GPIO_MOTOR, e);
     p += porcentaje;
     e += equivalencia;
     delay(1000);
+    lcd.clear();
   }
   for(int i = 1; i <= tiempo; i++){
     p -= porcentaje;
     e -= equivalencia;
-    lcd.print("");
     lcd.print(i);
     lcd.print(" Segundo(s)");
-    lcd.print("");
+    lcd.setCursor(0,1);
     lcd.print(p);
     lcd.print(" %");
-    lcd.print("");
     analogWrite(GPIO_MOTOR, e);
     delay(1000);
+    lcd.clear();
   }
   analogWrite(GPIO_MOTOR, 0);
 }
